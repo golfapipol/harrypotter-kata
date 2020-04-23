@@ -41,7 +41,7 @@ func (b Basket) CountBook() int {
 func (b Basket) GetTotalPrice() Euro {
 	var sum Euro
 	for _, item := range b.books {
-		sum += item.GetPrice()
+		sum += item.GetPrice() * Euro(item.GetQuantity())
 	}
 	return sum
 }
@@ -73,4 +73,8 @@ func NewSelectedBook(title string, price Euro, quantity int) SelectedBook {
 
 func (b SelectedBook) GetPrice() Euro {
 	return b.price
+}
+
+func (b SelectedBook) GetQuantity() int {
+	return b.quantity
 }

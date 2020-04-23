@@ -36,3 +36,16 @@ func TestSelectPotterPart1BookAndPotterPart2BookIntoBasket(t *testing.T) {
 	assert.Equal(t, Euro(15.20), currentBasket.GetNetPrice())
 
 }
+
+func TestSelect2PotterPart1BookAndPotterPart2BookIntoBasket(t *testing.T) {
+	part1Book := NewBook("Harry Potter Part 1", Euro(8.00))
+	part2Book := NewBook("Harry Potter Part 2", Euro(8.00))
+	customer := NewCustomer()
+
+	customer.SelectToBasket(part1Book, 2)
+	customer.SelectToBasket(part2Book, 1)
+
+	currentBasket := customer.GetBasket()
+	assert.Equal(t, 2, currentBasket.CountBook())
+	assert.Equal(t, Euro(24.00), currentBasket.GetTotalPrice())
+}
