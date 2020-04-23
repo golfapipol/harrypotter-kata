@@ -35,6 +35,9 @@ func (b *Basket) AddBookWithQuantity(selectedBook Book, quantity int) {
 	b.books = append(b.books, NewSelectedBook(selectedBook.GetTitle(), selectedBook.GetPrice(), quantity))
 }
 
+func (b Basket) GetBooks() []SelectedBook {
+	return b.books
+}
 func (b Basket) CountBook() int {
 	return len(b.books)
 }
@@ -46,10 +49,8 @@ func (b Basket) GetTotalPrice() Euro {
 	return sum
 }
 func (b Basket) GetDiscountPrice() Euro {
-	if len(b.books) == 2 {
-		return b.GetTotalPrice() * 0.05
-	}
-	return 0.00
+	discount := NewDiscount(b.books, b.GetTotalPrice())
+	return discount.GetPrice()
 }
 func (b Basket) GetNetPrice() Euro {
 	return b.GetTotalPrice() - b.GetDiscountPrice()
