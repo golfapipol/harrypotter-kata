@@ -19,10 +19,7 @@ func (c Customer) GetBasket() Basket {
 }
 
 type Basket struct {
-	books         []SelectedBook
-	totalPrice    Euro
-	discountPrice Euro
-	netPrice      Euro
+	books []SelectedBook
 }
 
 func NewBasket() Basket {
@@ -72,6 +69,9 @@ func NewSelectedBook(title string, price Euro, quantity int) SelectedBook {
 	}
 }
 
+func (b SelectedBook) GetTitle() string {
+	return b.title
+}
 func (b SelectedBook) GetPrice() Euro {
 	return b.price
 }
