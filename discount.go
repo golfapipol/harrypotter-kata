@@ -43,13 +43,13 @@ func NewDiscount(books []SelectedBook, totalPrice Euro) Discount {
 }
 
 func (d Discount) GetPrice() Euro {
-	sets := []SetOfBook{
-		NewSetOfBook(),
-		NewSetOfBook(),
-	}
+	sets := []SetOfBook{}
 	for _, book := range d.books {
 		if len(sets) < book.GetQuantity() {
-			sets = append(sets, make([]SetOfBook, book.GetQuantity()-len(sets))...)
+			setsLength := len(sets)
+			for i := 0; i <= book.GetQuantity()-setsLength; i++ {
+				sets = append(sets, NewSetOfBook())
+			}
 		}
 		for i, currentSet := 0, 0; i < book.GetQuantity(); {
 			if sets[currentSet].IsBookExist(book) {
