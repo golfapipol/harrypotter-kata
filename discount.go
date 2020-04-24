@@ -29,6 +29,9 @@ func (s SetOfBook) GetPrice() Euro {
 	for _, book := range s.books {
 		sum += book.GetPrice()
 	}
+	if len(s.books) == 3 {
+		return sum * 0.10
+	}
 	if len(s.books) == 2 {
 		return sum * 0.05
 	}
